@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-cols = ['age_afm', 'consumer', 'h_often_12m', 'h_often_5beer_12m', 'edu']
+columns = ['age_afm', 'consumer', 'frequency_12m', 'frequency_5beer_12m', 'edu']
 
 
 def read_data():
