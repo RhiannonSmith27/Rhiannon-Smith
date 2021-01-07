@@ -1,0 +1,36 @@
+import pandas as pd
+import os
+
+cols = ['age_afm', 'consumer', 'h_often_12m', 'h_often_5beer_12m', 'edu']
+
+
+def read_data():
+    # read data and rename columns
+    columns = ['S1Q4A', 'CONSUMER', 'S2AQ5B', 'S2AQ5G', 'S1Q6A']
+    data = pd.read_csv('../nesarc_pds.csv',
+                       low_memory=False, usecols=columns, )
+    data.rename(columns={'S1Q4A': 'age_afm',
+                         'CONSUMER': 'consumer',
+                         'S2AQ5B': 'frequency_12m',
+                         'S2AQ5G': 'frequency_5beer_12m',
+                         'S1Q6A': 'edu'}, inplace=True)
+    return data
+
+
+def distribution(var_data):
+    """this function will print out the frequency
+    distribution for every variable in the data-frame   """
+    var_data = pd.to_numeric(var_data, errors='ignore')
+    print("the count of the values in {}".format(var_data.name))
+    print(var_data.value_counts())
+    print("the % of every value in the {} variable  ".format(var_data.name))
+    print(var_data.value_counts(normalize=True))
+
+
+def print_dist():
+    # loops though the variables and print
+    for i in cols:
+        print(distribution(the_data()[i]))
+
+
+print_dist()
